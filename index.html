@@ -7,21 +7,35 @@
 </head>
 <body>
 	<div id="main">
-	  <h2><img :src="logo" class="s-logo"> {{ title }}</h2>
-	  <text-input v-for="textbox in textboxes" :inputinfo="textbox"></text-input>
-	  <checkbox-input v-for="checkbox in checkboxes" :inputinfo="checkbox"></checkbox-input>
+		<h2><img :src="logo" class="s-logo"> {{ title }}</h2>
+		<panel-elem v-if="panel.show" v-for="panel in panels">
+			<h3>{{ panel.heading }}</h3>
+			<text-input v-if="panel.textboxes" v-for="textbox in panel.textboxes" :inputinfo="textbox"></text-input>
+			<checkbox-input v-if="panel.checkboxes" v-for="checkbox in panel.checkboxes" :inputinfo="checkbox"></checkbox-input>
+		</panel-elem>
 	</div>
+
+<!-- Begin compnent templates -->
+	<template id="panel-elem-template">
+		<div class="panel panel-default">
+		  <div class="panel-body">
+		    <slot></slot>
+		  </div>
+		</div>
+	</template>
 	<template id="text-input-template">
-		<div class="col-md-4 s-textinput">
+		<div :class="inputinfo.class">
 			<input type=text :id="inputinfo.id" :title="inputinfo.help">
 		 	<label :for="inputinfo.id">{{ inputinfo.label }}</label>
 	 	</div>
 	</template>
 	<template id="checkbox-input-template">
-		<div class="col-md-3 s-checkboxinput">
+		<div :class="inputinfo.class">
 			<input type=checkbox :id="inputinfo.id"> {{ inputinfo.text }}
 	 	</div>
 	</template>
+<!-- End component templates -->
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
 	<script src="app.js"></script>
 </html>
