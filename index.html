@@ -7,9 +7,9 @@
 </head>
 <body>
 	<div id="main">
-	  <h2><img :src="logo" class="s-logo"> {{ title }}</h2>
-	  <text-input v-for="textbox in textboxes" :inputinfo="textbox"></text-input>
-	  <checkbox-input v-for="checkbox in checkboxes" :inputinfo="checkbox"></checkbox-input>
+		<h2><img :src="logo" class="s-logo"> {{ title }}</h2>
+		<text-input v-for="textbox in textboxes" :inputinfo="textbox"></text-input>
+		<checkbox-input v-for="checkbox in checkboxes" :inputinfo="checkbox"></checkbox-input>
 	</div>
 	<template id="text-input-template">
 		<div class="col-md-4 s-textinput">
@@ -24,4 +24,5 @@
 	</template>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
 	<script src="app.js"></script>
+</body>
 </html>
