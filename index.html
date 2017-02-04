@@ -10,10 +10,12 @@
 		<h2><img :src="logo" class="s-logo"> {{ title }}</h2>
 		<span v-for="panel in panels">
 			<panel-elem v-if="panel.show" :panelinfo="panel">
-				<span v-if="panel.inputs" v-for="input in panel.inputs">
-					<text-input v-if="input.type === 'text'" :inputinfo="input"></text-input>
-					<checkbox-input v-if="input.type === 'checkbox'" :inputinfo="input"></checkbox-input>
-				</span>
+				<div class="row">
+					<span v-if="panel.inputs" v-for="input in panel.inputs">
+						<text-input v-if="input.type === 'text'" :inputinfo="input"></text-input>
+						<checkbox-input v-if="input.type === 'checkbox'" :inputinfo="input"></checkbox-input>
+					</span>
+				</div>
 				<div class="row s-nav-row" v-if="navbuttons">
 					<span v-for="navbutton in navbuttons">
 						<nav-button :buttoninfo="navbutton"></nav-button>
