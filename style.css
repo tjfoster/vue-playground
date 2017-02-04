@@ -5,3 +5,7 @@
 .s-textinput, .s-checkboxinput {
 	margin-bottom: 1em;
 }
+
+.s-right {
+	text-align: right;
+}
