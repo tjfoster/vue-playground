@@ -50,7 +50,6 @@ var app = new Vue({
 	},
 	methods: {
 		nextPanel: function() {
-
 			this.currentPanel++;
 		},
 		prevPanel: function() {

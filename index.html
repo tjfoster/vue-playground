@@ -7,10 +7,9 @@
 </head>
 <body>
 	<div id="main">
-		{{ firstname }}
 		<h2><img :src="logo" class="s-logo"> {{ title }}</h2>
 		<span v-for="(panel, index) in panels">
-			<transition name="slide-fade">
+			<transition name="slide-fade" mode="out-in">
 				<panel-elem :panelinfo="panel" v-if="index == currentPanel" >
 					<div class="row">
 						<span v-if="panel.inputs" v-for="input in panel.inputs">
