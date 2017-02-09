@@ -13,3 +13,17 @@
 .s-nav-row {
 
 }
+
+.slide-fade-enter-active {
+  transition: all .8s ease;
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+/* Generic styles */
+.right {
+	text-align: right;
+}

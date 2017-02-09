@@ -7,21 +7,33 @@
 </head>
 <body>
 	<div id="main">
+		{{ firstname }}
 		<h2><img :src="logo" class="s-logo"> {{ title }}</h2>
-		<span v-for="panel in panels">
-			<panel-elem v-if="panel.show" :panelinfo="panel">
-				<div class="row">
-					<span v-if="panel.inputs" v-for="input in panel.inputs">
-						<text-input v-if="input.type === 'text'" :inputinfo="input"></text-input>
-						<checkbox-input v-if="input.type === 'checkbox'" :inputinfo="input"></checkbox-input>
-					</span>
-				</div>
-				<div class="row s-nav-row" v-if="navbuttons">
-					<span v-for="navbutton in navbuttons">
-						<nav-button :buttoninfo="navbutton"></nav-button>
-					</span>
-				</div>
-			</panel-elem>
+		<span v-for="(panel, index) in panels">
+			<transition name="slide-fade">
+				<panel-elem :panelinfo="panel" v-if="index == currentPanel" >
+					<div class="row">
+						<span v-if="panel.inputs" v-for="input in panel.inputs">
+							<text-input v-if="input.type === 'text'" :inputinfo="input"></text-input>
+							<checkbox-input v-if="input.type === 'checkbox'" :inputinfo="input"></checkbox-input>
+						</span>
+					</div>
+					<div class="row s-nav-row">
+						<div class="col-xs-6">
+							<button id="prevbtn" class="btn btn-default" type="button" aria-label="Previous" v-if="currentPanel > 0" v-on:click="prevPanel">
+								<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+								Prev
+							</button>
+						</div>
+						<div class="col-xs-6 right">
+							<button id="nextbtn" class="btn btn-default" type="button" aria-label="Next" v-if="currentPanel < panels.length-1" v-on:click="nextPanel">
+								Next
+								<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+				</panel-elem>
+			</transition>
 		</span>
 	</div>
 
@@ -41,7 +53,7 @@
 	<!-- standard text template -->
 	<template id="text-input-template">
 		<div :class="inputinfo.class">
-			<input :id="inputinfo.id" type=text :title="inputinfo.help">
+			<input :id="inputinfo.id" type="textbox" :title="inputinfo.help" v-model="inputinfo.model">
 		 	<label :for="inputinfo.id">{{ inputinfo.label }}</label>
 	 	</div>
 	</template>
@@ -50,22 +62,10 @@
 	<!-- standard checkbox template -->
 	<template id="checkbox-input-template">
 		<div :class="inputinfo.class">
-			<input :id="inputinfo.id" type=checkbox> {{ inputinfo.text }}
+			<input :id="inputinfo.id" type="checkbox"> {{ inputinfo.text }}
 	 	</div>
 	</template>
 	<!-- end standard checkbox template -->
-
-	<!-- standard button template -->
-	<template id="nav-button-template">
-		<div :class="buttoninfo.colclass">
-			<button :id="buttoninfo.id" :class="buttoninfo.class" type="button" v-if="buttoninfo.label" :aria-label="buttoninfo.arialabel" v-on:click="changePanel">
-				<span :class="buttoninfo.glyph" v-if="buttoninfo.glyphfirst && buttoninfo.glyph" aria-hidden="true"></span>
-				{{ buttoninfo.label }}
-				<span :class="buttoninfo.glyph" v-if="!buttoninfo.glyphfirst && buttoninfo.glyph" aria-hidden="true"></span>
-			</button>
-		</div>
-	</template>
-	<!-- end standard button template -->
 
 <!-- End component templates -->
 
